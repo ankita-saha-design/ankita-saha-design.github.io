@@ -323,3 +323,40 @@ body.resume::after{display:none}
 .cv h3 em{color:#797575}
 .cv time{color:#161515}
 .cv ul,.cv .skills{color:#161515}
+
+/* ===== Round 4: fluid hero + prev/next project nav ===== */
+/* Hero now lives in a centred container that matches the work-grid width,
+   so the art and the copy stay locked to the same edges at any window size
+   instead of sitting at a fixed pixel offset once past the 1728px cap. */
+.hero{height:auto;min-height:calc(650 * var(--s));display:flex;align-items:stretch}
+.hero-inner{position:relative;width:calc(1548 * var(--s));margin-inline:auto;
+  display:grid;grid-template-columns:minmax(0,900fr) minmax(0,648fr);column-gap:calc(21 * var(--s));align-items:stretch}
+.hero-copy{position:static;left:auto;top:auto;bottom:auto;width:auto;
+  padding:calc(180 * var(--s)) 0 calc(36 * var(--s));gap:calc(40 * var(--s))}
+.hero-art{position:static;left:auto;top:auto;align-self:start;margin-left:auto;width:94.44%;max-width:calc(612 * var(--s))}
+.hero h1{max-width:100%}
+.hero .meta{width:100%;max-width:none;margin-top:0;flex-wrap:wrap;column-gap:calc(40 * var(--s));row-gap:.5em}
+.hero .meta p{white-space:normal}
+
+/* prev / next project footer nav */
+.proj-nav{display:flex;justify-content:space-between;align-items:flex-start;gap:calc(48 * var(--s));margin-top:calc(140 * var(--s))}
+.proj-nav>a{flex:0 1 auto;max-width:calc(50% - calc(24 * var(--s)));margin-top:0}
+.prev-proj{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-decoration:none;color:var(--text);text-align:left}
+.prev-proj:hover .np-title{text-decoration:underline;text-underline-offset:.15em;text-decoration-thickness:2px}
+.prev-proj:hover .np-title svg{transform:translateX(-6px)}
+@media (max-width:760px){
+  .hero{display:block;min-height:0}
+  .hero-inner{width:calc(100% - 40px);display:flex;flex-direction:column}
+  .hero-copy{margin:0;padding:40px 0 0;gap:24px}
+  .hero-art{margin:32px 0 0;width:100%;max-width:none}
+  .hero .meta{row-gap:14px;column-gap:14px}
+  .proj-nav{flex-direction:column;align-items:stretch;gap:28px;margin-top:56px}
+  .proj-nav>a{max-width:100%}
+  .next-proj{align-items:flex-start;text-align:left;margin-left:0;width:auto}
+  .prev-proj{width:auto}
+}
+/* arrows flow with the text so they stay on the first/last line when a title wraps */
+.np-title{display:block}
+.np-title svg{display:inline-block;width:1em;height:1em;vertical-align:-.1em}
+.next-proj .np-title svg{margin-left:.3em}
+.prev-proj .np-title svg{margin-right:.3em}
