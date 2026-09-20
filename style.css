@@ -423,10 +423,8 @@ body.resume::after{display:none}
 }
 
 /* --- Juspay thumbnail cards --- */
-/* The card outline used to be baked into the artwork, flush with the image
-   boundary, where it rendered as a grey hairline. It is cropped out of the
-   source files now, so the silhouette is drawn here instead. The After art is
-   fractionally narrower than the Before art, so it is sized by width to keep
-   both cards at exactly the same height. */
-.thumb-card{border-radius:calc(10 * var(--s))}
-.thumb-after{width:96.22%;margin-inline:auto}
+.thumb-label{text-align:center;font:500 max(15px,calc(24 * var(--s)))/1.2 var(--f-body);margin-bottom:calc(40 * var(--s))}
+/* The After export is fractionally narrower than the Before export, so it is
+   sized by width rather than by column to keep both cards exactly the same
+   height. 1505/1344 vs 1450/1344 gives 96.34%. */
+.thumb-after{width:96.34%;margin-inline:auto}
