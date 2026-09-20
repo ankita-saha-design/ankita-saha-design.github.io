@@ -29,3 +29,12 @@ document.querySelectorAll('.tabs[data-target]').forEach(function(g){
     g.querySelectorAll('button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false');});
     var slot=document.getElementById(g.dataset.target).querySelector('.slot');
     slot.setAttribute('data-label',b.dataset.src);fillSlot(slot,b.dataset.src);});});
+(function(){var t=document.querySelector('.nav-toggle');if(!t)return;
+  var menu=document.getElementById('nav-menu'),scrim=document.querySelector('.nav-scrim'),b=document.body;
+  function set(open){b.classList.toggle('nav-open',open);t.setAttribute('aria-expanded',open?'true':'false');
+    t.setAttribute('aria-label',open?'Close menu':'Open menu');}
+  t.addEventListener('click',function(){set(!b.classList.contains('nav-open'));});
+  if(scrim)scrim.addEventListener('click',function(){set(false);});
+  if(menu)menu.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+  addEventListener('resize',function(){if(innerWidth>760)set(false);});})();

@@ -147,8 +147,6 @@ body.resume{background:var(--page)}
 /* ===== Mobile ===== */
 @media (max-width:760px){
   .wrap{width:calc(100% - 40px)}
-  .nav{flex-wrap:wrap;row-gap:10px}
-  .nav .right{gap:18px;width:100%;justify-content:space-between}
   .nav .links{gap:18px}
   .band{height:auto;padding:14px 0}
   #work{scroll-margin-top:96px}
@@ -360,3 +358,75 @@ body.resume::after{display:none}
 .np-title svg{display:inline-block;width:1em;height:1em;vertical-align:-.1em}
 .next-proj .np-title svg{margin-left:.3em}
 .prev-proj .np-title svg{margin-right:.3em}
+
+/* ===== Round 5: hero copy block, larger headline, mobile nav drawer ===== */
+/* Headline and the two meta lines read as one group, the meta sitting a little
+   down the hero rather than pinned to its bottom edge. The copy column is sized
+   to the headline's longest line (max-content), so the meta row spans exactly
+   the headline's width and "Designing Juspay" ends where the headline ends. */
+.hero-copy{justify-content:flex-start;gap:calc(96 * var(--s));
+  padding:calc(150 * var(--s)) 0 calc(36 * var(--s))}
+@media (min-width:761px){
+  /* max-content keeps the column exactly as wide as the headline's longest line;
+     on phones the copy stays a plain stacked column so nothing can overflow */
+  .hero-copy{display:grid;grid-template-columns:max-content;align-content:start;justify-items:start}
+  .hero .meta{width:100%}
+  .hero-art{width:89.72%;max-width:calc(581 * var(--s))}   /* 5% smaller than the Figma 612 */
+}
+.hero h1{font-size:max(32px,calc(84 * var(--s)))}
+
+/* --- mobile nav: hamburger + side drawer --- */
+.nav-toggle{display:none;background:none;border:0;padding:10px;margin:-10px -6px -10px 0;cursor:pointer;
+  color:inherit;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px}
+.nav-toggle span{display:block;width:22px;height:2px;background:currentColor;border-radius:2px;
+  transition:transform .25s ease,opacity .2s ease}
+.nav-scrim{display:none}
+@media (max-width:760px){
+  .nav{position:relative}
+  .nav-toggle{display:flex;position:relative;z-index:46}
+  body.nav-open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  body.nav-open .nav-toggle span:nth-child(2){opacity:0}
+  body.nav-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+  /* the menu itself becomes a panel that slides in from the right edge */
+  .nav .right{position:fixed;top:0;right:0;z-index:45;height:100dvh;width:min(76vw,300px);
+    background:var(--ink-dark);color:#fff;flex-direction:column;align-items:flex-start;justify-content:flex-start;
+    gap:32px;padding:calc(max(64px,118 * var(--s)) + 24px) 28px 32px;
+    transform:translateX(100%);transition:transform .3s ease;overflow-y:auto;
+    box-shadow:-12px 0 32px rgba(0,0,0,.25);visibility:hidden}
+  .band-light .right{background:#fff;color:var(--ink-dark)}
+  body.nav-open .nav .right{transform:none;visibility:visible}
+  .nav .links{flex-direction:column;align-items:flex-start;gap:22px;font-size:20px;letter-spacing:0}
+  .nav .social{gap:22px}
+  .nav .social svg{width:22px}
+
+  .nav-scrim{display:block;position:fixed;inset:0;z-index:42;background:rgba(0,0,0,.5);
+    opacity:0;pointer-events:none;transition:opacity .3s ease}
+  body.nav-open .nav-scrim{opacity:1;pointer-events:auto}
+  body.nav-open{overflow:hidden}
+}
+
+/* --- other small-screen fixes --- */
+@media (max-width:760px){
+  /* justified copy opens up rivers of whitespace at this measure */
+  .lede,.split p{text-align:left}
+  .hero h1{font-size:clamp(32px,8.5vw,46px)}
+  .hero-copy{padding:36px 0 0;gap:18px}
+  /* let the illustration size to its own height instead of sitting in a
+     letterboxed 612x637 box with dead space above and below */
+  .hero-art .slot{aspect-ratio:auto}
+  .hero-art .slot>img{position:static;width:100%;height:auto}
+  .cs-title{font-size:clamp(26px,7vw,34px)}
+  .proj-nav .np-title{font-size:clamp(18px,5.2vw,24px)}
+  .tabs{gap:8px}
+  .tabs button{padding:.5em 1em}
+}
+
+/* --- Juspay thumbnail cards --- */
+/* The card outline used to be baked into the artwork, flush with the image
+   boundary, where it rendered as a grey hairline. It is cropped out of the
+   source files now, so the silhouette is drawn here instead. The After art is
+   fractionally narrower than the Before art, so it is sized by width to keep
+   both cards at exactly the same height. */
+.thumb-card{border-radius:calc(10 * var(--s))}
+.thumb-after{width:96.22%;margin-inline:auto}
