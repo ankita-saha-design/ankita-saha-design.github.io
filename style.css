@@ -17,7 +17,7 @@ body{font-family:var(--f-body);color:var(--ink);background:var(--page);-webkit-f
 img,video{display:block;max-width:100%}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--olive);outline-offset:3px}
-.band :focus-visible{outline-color:#fff}
+.band :focus-visible{outline-color:var(--olive)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
 /* paper texture overlay (image 35/36/39 in Figma: multiply @ 40%) */
@@ -37,8 +37,9 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
 .nav .links a[aria-current="page"]{font-weight:700}
 .nav .social{display:flex;gap:calc(21.6 * var(--s))}
 .nav .social svg{width:max(18px,calc(27 * var(--s)));height:auto;display:block}
-.band{position:sticky;top:0;z-index:40;background:var(--ink-dark);height:max(64px,calc(118 * var(--s)));display:flex;align-items:center;color:#fff}
-.band-light{background:#fff;color:var(--ink-dark)}
+.band{position:sticky;top:0;z-index:40;background:#fff;height:max(64px,calc(118 * var(--s)));display:flex;align-items:center;color:var(--text);border-bottom:1px solid transparent;transition:border-bottom-color .2s ease}
+.band.is-scrolled{border-bottom-color:#e5e5e5}
+.band-light{background:#fff;color:var(--text)}
 .band-light :focus-visible{outline-color:var(--olive)}
 #work{scroll-margin-top:max(64px,calc(118 * var(--s)))}
 
@@ -50,7 +51,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
 .slot.contain>img{object-fit:contain}
 
 /* ===== Home ===== */
-body.home{background:var(--ink-dark)}
+body.home{background:#fff}
 .hero{position:relative;background:#fff;height:calc(650 * var(--s));color:var(--ink-dark)}
 .hero-art{position:absolute;left:calc(1011 * var(--s));top:0;width:calc(612 * var(--s))}
 .hero-copy{position:absolute;left:var(--gutter);top:calc(180 * var(--s));bottom:calc(36 * var(--s));width:calc(900 * var(--s));z-index:1;display:flex;flex-direction:column;justify-content:space-between}
@@ -61,7 +62,7 @@ body.home{background:var(--ink-dark)}
 .hero .meta .now{align-self:flex-end}
 .work-grid{display:grid;grid-template-columns:1fr 1fr;column-gap:calc(45 * var(--s));row-gap:calc(69 * var(--s));
   padding:var(--gutter) 0 calc(160 * var(--s))}
-.card{display:flex;flex-direction:column;gap:calc(28.8 * var(--s));text-decoration:none;color:#fff}
+.card{display:flex;flex-direction:column;gap:calc(28.8 * var(--s));text-decoration:none;color:var(--text)}
 .card .slot{--ar:752/511;transition:transform .35s ease}
 .card:hover .slot{transform:scale(1.015)}
 .card span{font:400 max(18px,calc(36 * var(--s)))/1 var(--f-display)}
@@ -220,8 +221,8 @@ body.resume{background:var(--page)}
 
 /* ===== Round 2 overrides ===== */
 :root{--pad:calc(190 * var(--s))}
-/* compact dark menu bar everywhere */
-.band{height:max(46px,calc(59 * var(--s)));background:var(--ink-dark);color:#fff}
+/* compact white menu bar everywhere */
+.band{height:max(46px,calc(59 * var(--s)));background:#fff;color:var(--text)}
 .nav{font-size:max(14px,calc(20 * var(--s)))}
 .nav .links{gap:calc(56 * var(--s))}
 .nav .right{gap:calc(80 * var(--s))}
@@ -390,11 +391,11 @@ body.resume::after{display:none}
 
   /* the menu itself becomes a panel that slides in from the right edge */
   .nav .right{position:fixed;top:0;right:0;z-index:45;height:100dvh;width:min(76vw,300px);
-    background:var(--ink-dark);color:#fff;flex-direction:column;align-items:flex-start;justify-content:flex-start;
-    gap:32px;padding:calc(max(64px,118 * var(--s)) + 24px) 28px 32px;
+    background:#fff;color:var(--text);flex-direction:column;align-items:flex-start;justify-content:flex-start;
+    gap:32px;padding:calc(max(64px,118 * var(--s)) + 24px) 28px 32px;border-left:1px solid #e5e5e5;
     transform:translateX(100%);transition:transform .3s ease;overflow-y:auto;
-    box-shadow:-12px 0 32px rgba(0,0,0,.25);visibility:hidden}
-  .band-light .right{background:#fff;color:var(--ink-dark)}
+    box-shadow:-12px 0 32px rgba(0,0,0,.12);visibility:hidden}
+  .band-light .right{background:#fff;color:var(--text)}
   body.nav-open .nav .right{transform:none;visibility:visible}
   .nav .links{flex-direction:column;align-items:flex-start;gap:22px;font-size:20px;letter-spacing:0}
   .nav .social{gap:22px}

@@ -38,3 +38,15 @@ document.querySelectorAll('.tabs[data-target]').forEach(function(g){
   if(menu)menu.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
   addEventListener('resize',function(){if(innerWidth>760)set(false);});})();
+(function(){
+  var bands = document.querySelectorAll('.band');
+  if(!bands.length) return;
+  function onScroll(){
+    var isScrolled = (window.scrollY || document.documentElement.scrollTop || 0) > 0;
+    for(var i = 0; i < bands.length; i++){
+      bands[i].classList.toggle('is-scrolled', isScrolled);
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
